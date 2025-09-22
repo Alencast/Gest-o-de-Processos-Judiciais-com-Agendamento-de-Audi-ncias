@@ -6,8 +6,8 @@ Este projeto é uma API **Spring Boot** para gerenciamento de processos judiciai
 
 ## 🔹 Tecnologias utilizadas
 
-- Java 17+
-- Spring Boot 3.x
+- Java 21
+- Spring Boot 
 - Spring Data JPA
 - H2 Database (em memória)
 - Lombok
