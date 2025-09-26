@@ -1,10 +1,10 @@
-package model;
+package com.tj.projetoTJ.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.enums.TipoAudiencia;
+import com.tj.projetoTJ.model.enums.TipoAudiencia;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @Entity
-public static class Audiencia {
+public class Audiencia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

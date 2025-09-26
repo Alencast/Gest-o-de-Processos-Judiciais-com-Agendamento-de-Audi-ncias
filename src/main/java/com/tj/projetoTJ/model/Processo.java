@@ -1,13 +1,10 @@
-package model;
+package com.tj.projetoTJ.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.enums.StatusProcesso;
-import model.enums.TipoAudiencia;
-
-import java.time.LocalDateTime;
+import com.tj.projetoTJ.model.enums.StatusProcesso;
 
 @NoArgsConstructor
 @AllArgsConstructor
