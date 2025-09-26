@@ -15,10 +15,16 @@ public class Processo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String numeroProcesso;
+
     private String vara;
+
     private String comarca;
+
     private String assunto;
+
+    @Enumerated(EnumType.STRING)
     private StatusProcesso status;
 
 

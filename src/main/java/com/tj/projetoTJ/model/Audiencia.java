@@ -22,9 +22,14 @@ public class Audiencia {
     @JoinColumn(name = "processo_id")
     private Processo processo;
 
+    private String local;
+
+    @Column(nullable = false)
     private LocalDateTime dataHora;
 
+    private LocalDateTime dataHoraFim;
+
+    @Enumerated(EnumType.STRING)
     private TipoAudiencia tipoAudiencia;
 
-    private LocalDateTime dataHoraFim;
 }
