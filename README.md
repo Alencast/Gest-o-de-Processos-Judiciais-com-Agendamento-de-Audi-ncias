@@ -12,7 +12,6 @@ Este projeto é uma API **Spring Boot** para gerenciamento de processos judiciai
 - H2 Database (em memória)
 - Lombok
 - Swagger (SpringDoc OpenAPI)
-- Bean Validation (`@Valid`, `@Pattern`)
 - Maven
 
 ---
