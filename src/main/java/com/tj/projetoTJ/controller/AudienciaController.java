@@ -1,16 +1,21 @@
 package com.tj.projetoTJ.controller;
 
+import com.tj.projetoTJ.dto.AudienciaRequestDTO;
+import com.tj.projetoTJ.dto.AudienciaResponseDTO;
+import com.tj.projetoTJ.mapper.AudienciaMapper;
 import com.tj.projetoTJ.model.Audiencia;
 import com.tj.projetoTJ.service.AudienciaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,9 +23,11 @@ import java.util.List;
 public class AudienciaController {
 
     private AudienciaService audienciaService;
+    private AudienciaMapper audienciaMapper;
 
-    public AudienciaController(AudienciaService audienciaService) {
+    public AudienciaController(AudienciaService audienciaService, AudienciaMapper audienciaMapper) {
         this.audienciaService = audienciaService;
+        this.audienciaMapper = audienciaMapper;
     }
 
     @Operation(summary = "Agendar nova audiência", description = "Cria uma nova audiência vinculada a um processo")
@@ -29,9 +36,9 @@ public class AudienciaController {
             @ApiResponse(responseCode = "400", description = "Erro de validação nos dados")
     })
     @PostMapping
-    public ResponseEntity<Audiencia> agendarAudiencia(@RequestBody Audiencia audiencia){
+    public ResponseEntity<Audiencia> agendarAudiencia(@RequestBody @Valid AudienciaRequestDTO dto){
 
-        Audiencia salva = audienciaService.agendarAudiencia(audiencia);
+        Audiencia salva = audienciaService.agendarAudiencia(dto); //vai buscar o mapper lá no service pra evitar o bo do processo
         return ResponseEntity.status(HttpStatus.CREATED).body(salva);
     }
 
@@ -40,9 +47,15 @@ public class AudienciaController {
             @ApiResponse(responseCode = "200", description = "Lista de audiências")
     })
     @GetMapping
-    public ResponseEntity<List<Audiencia>> listarAudiencias(){
+    public ResponseEntity<List<AudienciaResponseDTO>> listarAudiencias(){
         List<Audiencia> audiencias = audienciaService.findAll();
-        return ResponseEntity.ok(audiencias);
+
+        //converter os dtos loucões
+        List<AudienciaResponseDTO> respostaLista = new ArrayList<>();
+        for(Audiencia a : audiencias){
+            respostaLista.add(audienciaMapper.respostaDTO(a));
+        }
+        return ResponseEntity.ok(respostaLista);
     }
 
 
@@ -53,12 +66,17 @@ public class AudienciaController {
     })
 
     @GetMapping("/agenda")
-    public ResponseEntity<List<Audiencia>> consultarAgenda(
+    public ResponseEntity<List<AudienciaResponseDTO>> consultarAgenda(
             @RequestParam String comarca,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data
     ){
         //da
         List<Audiencia> agenda = audienciaService.consultarAgenda(comarca, data);
-        return ResponseEntity.ok(agenda);
+
+        List<AudienciaResponseDTO>  respostaLista = new ArrayList<>();
+        for(Audiencia a : agenda){
+            respostaLista.add(audienciaMapper.respostaDTO(a));
+        }
+        return ResponseEntity.ok(respostaLista);
     }
 }

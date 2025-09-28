@@ -1,4 +1,4 @@
-package com.tj.projetoTJ;
+package com.tj.projetoTJ.mapper;
 
 import com.tj.projetoTJ.dto.ProcessoRequestDTO;
 import com.tj.projetoTJ.dto.ProcessoResponseDTO;
@@ -24,7 +24,7 @@ public class ProcessoMapper {
     }
 
     // Entidade -> DTO
-    public ProcessoResponseDTO resposta(Processo processo){
+    public ProcessoResponseDTO respostaDTO(Processo processo){
 
         if(processo == null){
             return null;

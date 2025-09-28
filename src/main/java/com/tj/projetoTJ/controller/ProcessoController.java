@@ -1,6 +1,6 @@
 package com.tj.projetoTJ.controller;
 
-import com.tj.projetoTJ.ProcessoMapper;
+import com.tj.projetoTJ.mapper.ProcessoMapper;
 import com.tj.projetoTJ.dto.ProcessoRequestDTO;
 import com.tj.projetoTJ.dto.ProcessoResponseDTO;
 import com.tj.projetoTJ.model.Processo;
@@ -39,7 +39,7 @@ public class ProcessoController {
     public ResponseEntity<ProcessoResponseDTO> criarProcesso(@RequestBody @Valid ProcessoRequestDTO requestDTO){
         Processo processo = processoMapper.toEntity(requestDTO);
         Processo salvo = processoService.criarProcesso(processo);
-        return ResponseEntity.status(HttpStatus.CREATED).body(processoMapper.resposta(salvo)); // devolver a resposta 201 se for criado
+        return ResponseEntity.status(HttpStatus.CREATED).body(processoMapper.respostaDTO(salvo)); // devolver a resposta 201 se for criado
     }
 
 
@@ -55,7 +55,7 @@ public class ProcessoController {
 
         List<ProcessoResponseDTO> listaDTOs = listaDTOs = new ArrayList<>();
         for(Processo processo : listaProcessos){
-            listaDTOs.add(processoMapper.resposta(processo));
+            listaDTOs.add(processoMapper.respostaDTO(processo));
         }
         return ResponseEntity.ok(listaDTOs);
     }

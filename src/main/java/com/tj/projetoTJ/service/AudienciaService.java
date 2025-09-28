@@ -1,5 +1,7 @@
 package com.tj.projetoTJ.service;
 
+import com.tj.projetoTJ.dto.AudienciaRequestDTO;
+import com.tj.projetoTJ.mapper.AudienciaMapper;
 import com.tj.projetoTJ.model.Audiencia;
 import com.tj.projetoTJ.model.Processo;
 import com.tj.projetoTJ.model.enums.StatusProcesso;
@@ -14,17 +16,23 @@ import java.util.List;
 public class AudienciaService {
 
     private final AudienciaRepository audienciaRepository;
+    private ProcessoService processoService;
+    private AudienciaMapper audienciaMapper;
 
-    public AudienciaService(AudienciaRepository audienciaRepository) {
+    public AudienciaService(AudienciaRepository audienciaRepository, ProcessoService processoService, AudienciaMapper audienciaMapper) {
         this.audienciaRepository = audienciaRepository;
+        this.processoService = processoService;
+        this.audienciaMapper = audienciaMapper;
     }
 
     public List<Audiencia> findAll(){
         return audienciaRepository.findAll();
     }
 
-    public Audiencia agendarAudiencia(Audiencia audiencia){
+    public Audiencia agendarAudiencia(AudienciaRequestDTO dto){
 
+        Processo processo = processoService.buscarPorId(dto.getProcessoId());
+        Audiencia audiencia = audienciaMapper.toEntity(dto, processo);
         if(audiencia.getProcesso() == null){
             throw new IllegalArgumentException("Audiência não está vinculada a um processo válido");
         }

@@ -56,6 +56,11 @@ public class ProcessoService {
         }
     }
 
+    public Processo buscarPorId(Long id){
+        return processoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Processo não encontrado com id: " + id));
+    }
+
+
     // regex pro: 0000000-00.0000.0.00.0000
     private boolean validarNumeroProcesso(String numeroProcesso) {
         String regex = "\\d{7}-\\d{2}\\.\\d{4}\\.\\d\\.\\d{2}\\.\\d{4}";
