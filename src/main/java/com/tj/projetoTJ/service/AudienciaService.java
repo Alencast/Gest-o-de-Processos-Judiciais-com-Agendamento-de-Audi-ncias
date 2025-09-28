@@ -51,10 +51,10 @@ public class AudienciaService {
             throw new IllegalArgumentException("Audiência não pode ser marcada no fds");
         }
 
-        boolean conflitoCheck = audienciaRepository.existsByLocalAndDataHoraBetween(
+        boolean conflitoCheck = audienciaRepository.existsByLocalAndDataHoraLessThanEqualAndDataHoraFimGreaterThanEqual(
                 audiencia.getLocal(),
-                audiencia.getDataHora(),
-                audiencia.getDataHoraFim()
+                audiencia.getDataHoraFim(),
+                audiencia.getDataHora()
         );
 
         if(conflitoCheck){
