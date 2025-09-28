@@ -49,11 +49,11 @@ public class ProcessoController {
     })
     @GetMapping
     public ResponseEntity<List<ProcessoResponseDTO>> listarProcessos(@RequestParam(required = false) StatusProcesso status,
-                                                          @RequestParam(required = false) String comarca){
+                                                                     @RequestParam(required = false) String comarca){
 
         List<Processo> listaProcessos = processoService.filtrarProcesso(status, comarca);
 
-        List<ProcessoResponseDTO> listaDTOs = listaDTOs = new ArrayList<>();
+        List<ProcessoResponseDTO> listaDTOs = new ArrayList<>();
         for(Processo processo : listaProcessos){
             listaDTOs.add(processoMapper.respostaDTO(processo));
         }
