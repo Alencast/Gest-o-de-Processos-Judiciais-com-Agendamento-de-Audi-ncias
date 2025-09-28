@@ -91,7 +91,7 @@ git clone [https://github.com/seuusuario/incaas.git](https://github.com/Alencast
 
 2. Acesse o diretório do projeto:
 ```bash
-cd incaas
+cd 
 ```
 
 3. Rode o projeto:
@@ -126,7 +126,7 @@ mvn test
 ## 🔹 Diferenciais Implementáveis
 - Versionamento da API (`/api/v1`)
 - Validação personalizada com anotações (`@Valid`, `@Constraint`)
-- Autenticação simples via token JWT
+
 
 ---
 
