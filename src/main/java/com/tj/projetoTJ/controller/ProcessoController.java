@@ -54,7 +54,7 @@ public class ProcessoController {
         List<Processo> listaProcessos = processoService.filtrarProcesso(status, comarca);
 
         List<ProcessoResponseDTO> listaDTOs = new ArrayList<>();
-        for(Processo processo : listaProcessos){
+        for(Processo processo : listaProcessos) {
             listaDTOs.add(processoMapper.respostaDTO(processo));
         }
         return ResponseEntity.ok(listaDTOs);
