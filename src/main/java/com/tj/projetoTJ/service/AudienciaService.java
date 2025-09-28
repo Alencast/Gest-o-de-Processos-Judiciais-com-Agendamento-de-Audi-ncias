@@ -2,6 +2,7 @@ package com.tj.projetoTJ.service;
 
 import com.tj.projetoTJ.model.Audiencia;
 import com.tj.projetoTJ.model.Processo;
+import com.tj.projetoTJ.model.enums.StatusProcesso;
 import com.tj.projetoTJ.repository.AudienciaRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +25,22 @@ public class AudienciaService {
 
     public Audiencia agendarAudiencia(Audiencia audiencia){
 
+        if(audiencia.getProcesso() == null){
+            throw new IllegalArgumentException("Audiência não está vinculada a um processo válido");
+        }
+
+        var processoStatus = audiencia.getProcesso().getStatus();
+
+        if(processoStatus == StatusProcesso.ARQUIVADO || processoStatus == StatusProcesso.SUSPENSO){
+            throw new IllegalArgumentException("Processo suspenso ou cancelado");
+        }
         if (audiencia.getDataHoraFim() == null) {
             audiencia.setDataHoraFim(audiencia.getDataHora().plusHours(1));
+        }
+
+        int diaDaSemana = audiencia.getDataHora().getDayOfWeek().getValue();
+        if(diaDaSemana == 6 || diaDaSemana == 7){
+            throw new IllegalArgumentException("Audiência não pode ser marcada no fds");
         }
 
         boolean conflitoCheck = audienciaRepository.existsByLocalAndDataHoraBetween(
