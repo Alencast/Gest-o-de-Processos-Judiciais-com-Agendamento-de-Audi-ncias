@@ -20,22 +20,30 @@ Este projeto é uma API **Spring Boot** para gerenciamento de processos judiciai
 
 ```
 src/main/java
-└── br.com.incaas
-    ├── model
-    │   ├── Processo.java
-    │   ├── Audiencia.java
-    │   └── enums
-    │        ├── StatusProcesso.java
-    │        └── TipoAudiencia.java
-    ├── repository
-    │   ├── ProcessoRepository.java
-    │   └── AudienciaRepository.java
-    ├── service
-    │   ├── ProcessoService.java
-    │   └── AudienciaService.java
-    └── controller
-        ├── ProcessoController.java
-        └── AudienciaController.java
+└── br.com
+├── model
+│ ├── Processo.java
+│ ├── Audiencia.java
+│ └── enums
+│ ├── StatusProcesso.java
+│ └── TipoAudiencia.java
+├── dto
+│ ├── ProcessoRequestDTO.java
+│ ├── ProcessoResponseDTO.java
+│ ├── AudienciaRequestDTO.java
+│ └── AudienciaResponseDTO.java
+├── mapper
+│ ├── ProcessoMapper.java
+│ └── AudienciaMapper.java
+├── repository
+│ ├── ProcessoRepository.java
+│ └── AudienciaRepository.java
+├── service
+│ ├── ProcessoService.java
+│ └── AudienciaService.java
+└── controller
+├── ProcessoController.java
+└── AudienciaController.java
 ```
 
 ---
@@ -78,12 +86,12 @@ src/main/java
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seuusuario/incaas.git
+git clone [https://github.com/seuusuario/incaas.git](https://github.com/Alencast/Gest-o-de-Processos-Judiciais-com-Agendamento-de-Audi-ncias.git)
 ```
 
 2. Acesse o diretório do projeto:
 ```bash
-cd incaas
+cd 
 ```
 
 3. Rode o projeto:
@@ -118,7 +126,7 @@ mvn test
 ## 🔹 Diferenciais Implementáveis
 - Versionamento da API (`/api/v1`)
 - Validação personalizada com anotações (`@Valid`, `@Constraint`)
-- Autenticação simples via token JWT
+
 
 ---
 
